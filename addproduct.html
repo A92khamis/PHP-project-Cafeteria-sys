@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>addproduct</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<div class="nav">
+   <label><a href="#">Home</a></label>
+   		<label>|</label>
+   <label><a href="#">Products</a></label>
+      	<label>|</label>
+   <label><a href="#">Users</a></label>
+      	<label>|</label>
+   <label><a href="#">Manuel Order</a></label>
+      	<label>|</label>
+   <label><a href="#">Checks</a></label>
+</div>
+    <div id="user">    
+</div>
+<h1>Add Product</h1>
+<form class="form" " action="" method="POST"> 
+
+
+		<label>Product</label>
+		<input class="inputform" type="Text" name="product" required>
+		<br> 
+		<br> 
+
+		<label>Price</label>
+		<input class="inputform" type="Number" name="product" required>
+		<br> 
+		<br>
+<label>Category</label>
+<label>
+<select class="custom-select" required> 
+ <option value="1">Hot Drinks</option>
+ <option value="2">Cold Drinks</option>
+ <option value="3">Food</option>
+</select>
+<a href="">AddCategory</a>
+</label>
+<br>
+<br>
+	
+		<label>Product Picture</label>
+		<input type="file" name="productpic" accept="image/*" required>
+		<br> 
+		<br> 
+	
+		
+		<div align="Center"><input type="submit" name="submit"><input type="reset" name="reset"> </div>
+	
+</form>
+<div class="profilepic" >
+    <img src="imgs/admin.jpg">
+  </div>
+</body>
+</html>

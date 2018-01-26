@@ -144,14 +144,18 @@
 	// 	trigger_error($db->connect_error);
 	// }
 	#select from data base the user data
-		//$query = "select * from users where email = $_SESSION["iemail"]";
+	//$query = "select * from users where email = $_SESSION["iemail"]";
 	$result = $conn -> query("select * from users where email="."'".$_SESSION["iemail"]."'");
-
-	
-	
+	#put all the user data into array
 	$user_data = $result -> fetch_assoc();
-	var_dump($user_data);
 
+	#isert all the user data into session array
+	foreach ($user_data as $key => $value) {
+		$_SESSION["$key"] = $value;
+		# code...
+	}
+	//var_dump($user_data);
+	// unset($_SESSION["orderRoomNo"]);
 	?>
 	<!-- END of PHP CODE -->
 
@@ -160,7 +164,7 @@
 <!-- a script to get any variables I need from the php to js -->
 
 <script type="text/javascript">
-var userName = "<?php echo $_SESSION["iemail"] ?>";
+var userName = "<?php echo $user_data["uname"] ?>";
 </script>
 
 <!-- my page script -->

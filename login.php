@@ -22,7 +22,7 @@
     <br>
     <a href="#"> <p> Forgot Your Password</p></a>
     </form>
-    <p id="error-p" style="color: red"></p>
+    <p id="error-p" style="color: red"> <?php echo (isset($_GET['error']) ? 'invaled email or password' : '');?></p>
   </div>
 
 <?php
@@ -43,16 +43,18 @@ if ($_POST["ipassword"] == $row['password']) {
   header("Location: adduser.html");
   $error=0;
 }else{
-echo "<p>invaled email or password </p>";
+  $er="erorr";
+header("Location: login.php?error=$er");
 $error=1;
 }
 }else{
-echo "<p>invaled email or password </p>";
+header("Location: login.php?error=$er");
 $error=1;
 }
 }
-
 }
+$result->free();
+$conn->close();
 }
 if ($_POST) {
   check_in_database();
@@ -60,7 +62,7 @@ if ($_POST) {
 
  ?>
 <!-- <script type="text/javascript">
-  var error = "<?php echo $error ?>"
+  var error = "<?php //echo $error ?>"
   var p = document.getElementById('error-p');
   if (error==1) {
     p.innerHTML="invaled email or password";

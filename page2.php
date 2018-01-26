@@ -29,7 +29,7 @@
 <!-- order form -->
 
 	<div id="orderForm">
-	<form action="#" method="post" onchange="teaPrice.value=teaAmount.value*5+' EGP', coffePrice.value=coffeAmount.value*7+' EGP', juicePrice.value=juiceAmount.value*12+' EGP', pepsiPrice.value=pepsiAmount.value*8+' EGP'">
+	<form action="order_class.php" method="post" onchange="teaPrice.value=teaAmount.value*5+' EGP', coffePrice.value=coffeAmount.value*7+' EGP', juicePrice.value=juiceAmount.value*12+' EGP', pepsiPrice.value=pepsiAmount.value*8+' EGP'">
 		<table>
 			<tr>
 				<td>Tea</td>

@@ -1,0 +1,24 @@
+#menuBar{
+	float: left;
+}
+#searchBar{
+	clear: left;
+}
+#userTag{
+	/*position: absolute;*/
+	float: right;
+}
+#userImg{
+	width: 50px;
+	height: 50px;
+}
+#orderForm{
+	float: left;
+}
+#productOrder{
+	align-content: center;
+}
+img{
+	width: 50px;
+	height: 50px;
+}

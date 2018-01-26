@@ -17,7 +17,7 @@
 
 	<div id="userTag">
 		<img id="userImg" src="imgs/userImg.jpg">
-		<u>Islam Askar</u>
+		<u id="userName"></u>
 	</div>
 
 <!-- search bar -->
@@ -29,7 +29,7 @@
 <!-- order form -->
 
 	<div id="orderForm">
-	<form action="#" method="post" oninput="teaPrice.value=teaAmount.value*5+' EGP', coffePrice.value=coffeAmount.value*7+' EGP', juicePrice.value=juiceAmount.value*12+' EGP', pepsiPrice.value=pepsiAmount.value*8+' EGP'">
+	<form action="#" method="post" onchange="teaPrice.value=teaAmount.value*5+' EGP', coffePrice.value=coffeAmount.value*7+' EGP', juicePrice.value=juiceAmount.value*12+' EGP', pepsiPrice.value=pepsiAmount.value*8+' EGP'">
 		<table>
 			<tr>
 				<td>Tea</td>
@@ -116,18 +116,17 @@
 	#to display the errore
 	ini_set('display_errors', 'on');
 	error_reporting(E_ALL);
-	var_dump($_POST);
 	session_start();
 	
 	#variables in post from the form
 
-	$teaAmount = $_POST["teaAmount"];
-	$coffeAmount = $_POST["coffeAmount"];
-	$pepsiAmount = $_POST["pepsiAmount"];
-	$juiceAmount = $_POST["juiceAmount"];
-	$roomNo = $_POST["roomNo"];
-	$totalPrice = $_POST["totalPrice"];
-	$notes = $_POST["notes"];
+	// $teaAmount = $_POST["teaAmount"];
+	// $coffeAmount = $_POST["coffeAmount"];
+	// $pepsiAmount = $_POST["pepsiAmount"];
+	// $juiceAmount = $_POST["juiceAmount"];
+	// $roomNo = $_POST["roomNo"];
+	// $totalPrice = $_POST["totalPrice"];
+	// $notes = $_POST["notes"];
 
 	#send these variables to other pages in $_SESSION 
 
@@ -136,9 +135,39 @@
 	}
 
 	var_dump($_SESSION);
+
+	# connect to data base to get the user data
+
+	$conn = new mysqli("localhost", "root", "", "php_project");
+	#check for errors
+	// if ($conn->connect_errno) {
+	// 	trigger_error($db->connect_error);
+	// }
+	#select from data base the user data
+		//$query = "select * from users where email = $_SESSION["iemail"]";
+	$result = $conn -> query("select * from users where email="."'".$_SESSION["iemail"]."'");
+
+	
+	
+	$user_data = $result -> fetch_assoc();
+	var_dump($user_data);
+
 	?>
 	<!-- END of PHP CODE -->
+
 <!-- adding my script -->
-<script type="text/javascript" src="js/homePage.js"></script>
+
+<!-- a script to get any variables I need from the php to js -->
+
+<script type="text/javascript">
+var userName = "<?php echo $_SESSION["iemail"] ?>";
+</script>
+
+<!-- my page script -->
+
+<script type="text/javascript" src="js/homePage.js">
+</script>
+
+
 </body>
 </html>

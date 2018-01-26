@@ -81,6 +81,15 @@ var orderFn = function () {
 	totalPriceDisplay.textContent = totalPrice.value+' EGP';
 }
 
-
+var NameTag = document.getElementById('userName');
+NameTag.textContent = userName;
 // totalPrice.value = teaAmount.value;//*tea.price + juiceAmount.value*juice.price + coffeAmount.value*coffe.price + pepsiAmount.value*pepsi.price;
 // totalPriceDisplay.textContent = teaAmount.value;
+
+// getting the user name from the php
+
+
+// var userName = "<?php echo $_SESSION[\"iemail\"] ?>";
+
+// var userName = "<?php echo $val ?>";
+// console.log(userName);

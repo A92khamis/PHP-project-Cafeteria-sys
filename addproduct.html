@@ -19,7 +19,7 @@
     <div id="user">    
 </div>
 <h1>Add Product</h1>
-<form class="form" " action="" method="POST"> 
+<form class="form" " action="classproduct.php" method="POST"> 
 
 
 		<label>Product</label>
@@ -28,15 +28,15 @@
 		<br> 
 
 		<label>Price</label>
-		<input class="inputform" type="Number" name="product" required>
+		<input class="inputform" type="Number" name="price" required>
 		<br> 
 		<br>
 <label>Category</label>
 <label>
-<select class="custom-select" required> 
- <option value="1">Hot Drinks</option>
- <option value="2">Cold Drinks</option>
- <option value="3">Food</option>
+<select class="custom-select" name="category" required> 
+ <option value="Hot Drinks">Hot Drinks</option>
+ <option value="Cold Drinks">Cold Drinks</option>
+ <option >Food</option>
 </select>
 <a href="">AddCategory</a>
 </label>
@@ -44,7 +44,7 @@
 <br>
 	
 		<label>Product Picture</label>
-		<input type="file" name="productpic" accept="image/*" required>
+		<input type="file" name="productpic" accept="image/*" >
 		<br> 
 		<br> 
 	

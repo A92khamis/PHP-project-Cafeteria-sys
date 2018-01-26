@@ -1,12 +1,12 @@
 <?php
 class user {
 
-	public $uname;
-	public $email;
-	public $password;
-	public $room_no;
-	public $ext;
-	public $uid;
+	private $uname;
+	private $email;
+	private $password;
+	private $room_no;
+	private $ext;
+	private $uid;
 
 	public function __construct($unpar,$empar,$passwdpar,$nopar,$extpar,$uidpar){
 		$this->uname 	= $unpar;
@@ -47,6 +47,7 @@ $id='NULL';
 $object = new user ($_POST['name'],$_POST['email'],$_POST['password'],$_POST['room_no'],$_POST['ext'],$id);
 
 	 $object->insertIntoDB();
+header('Location: adduser.html');
 
   ?>
  

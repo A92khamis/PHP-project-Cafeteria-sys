@@ -26,7 +26,7 @@
 <!-- search bar -->
 
 	<div id="searchBar">
-		<input type="text" name="search" placeholder="search">
+		<input id="search_input" type="text" name="search" onkeyup="searchFun()" placeholder="search">
 	</div>
 
 <!-- order form -->
@@ -116,15 +116,28 @@ $array = array();
 if ($result) {
 while($row = $result->fetch_assoc()) {
 	$product = new Product($row['pid'],$row['pname'],$row['price']);
-	echo "<div id=\"".$product->pname."-".$product->pid."\" class=\"product\"> <img class=\"pimage\" src=\"imgs/tea.jpg\">
-	<label>".$product->pname."</label>
-	<label class=\"price\">".$product->price."</label></div>";
+	$array[]=$product;
+	echo "<div id=\"".$product->pname."-".$product->pid."\" class=\"product\"> <div> <img class=\"pimage\" src=\"imgs/tea.jpg\"></div>
+	<div id=\"".$product->pname."\">".$product->pname."</div>
+	<div id=\"".$product->pid."\"></div>
+	<label class=\"price\">".$product->price." LE</label></div>";
 }
-
+print_r($array);
 
 }else{
 	echo "<div id=\"noitems\"> <label> there is no items </label></div>";
 }
+echo "<script type=\"text/javascript\">
+function searchFun() {
+	var search = document.getElementById('search_input');
+	for (var i = 0; i < ".sizeof($array)."; i++) {
+		if (".$array[0]->pname.".includes(search.value)) {
+			console.log('include');
+		}
+	}
+}
+
+</script>";
 
 		 ?>
 	</div>
@@ -135,11 +148,11 @@ var orderPoard = document.getElementById('order_div');
 if (products) {
 for (i = 0; i < products.length; i++) {
     products[i].addEventListener('click',function (e) {
-    	console.log(e.target.id);
-    	var index= e.target.id.indexOf('-');
-    	var last = e.target.id.length;
-    	var item= e.target.id.slice(0,index);
-    	var id = e.target.id.slice(index,last);
+    	console.log(this.id);
+    	var index= this.id.indexOf('-');
+    	var last = this.id.length;
+    	var item= this.id.slice(0,index);
+    	var id = this.id.slice(index,last);
     	console.log(index);
     	
     	console.log(item);
@@ -147,6 +160,7 @@ for (i = 0; i < products.length; i++) {
 });
 }
 }	 	
+
 	 </script>
 </body>
 </html>

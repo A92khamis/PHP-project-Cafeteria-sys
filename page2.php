@@ -46,11 +46,13 @@
 			<tr>
 				<td>Juice</td>
 				<td><input type="number" name="juiceAmount" min="0" value="0"></td>
+				<td><input type="hidden" name="product" min="0" value="juice"></td>
 				<td><output name="juicePrice"></output></td>
 			</tr>
 			<tr>
 				<td>Pepsi</td>
 				<td><input type="number" name="pepsiAmount" min="0" value="0"></td>
+				<td><input type="hidden" name="product" min="0" value="pepsi"></td>
 				<td><output name="pepsiPrice"></output></td>
 			</tr>
 			<tr>

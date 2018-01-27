@@ -83,9 +83,9 @@ $new_order->insert_order();
 
 class Order_details{
 	private $oid;
-	private $odate;
-	private $status;
-	private $uid;
+	private $pid;
+	private $product_amount;
+	private $amount_price;
 
 }
 

@@ -3,6 +3,12 @@
 <head>
 	<title>Admin Page</title>
 	<link rel="stylesheet" type="text/css" href="css/georgestyle.css">
+	<style type="text/css">
+		#line{
+			border: 1px;
+			border-color: black;
+		}
+	</style>
 </head>
 <body>
 
@@ -78,7 +84,10 @@
 	</div>
 
 <!-- products -->
-
+<div id="searchDiv">
+	
+</div>
+<div id="line"> <label></label></div>
 	<div id="productOrder">
 		<!-- <table>
 			<tr>
@@ -122,22 +131,43 @@ while($row = $result->fetch_assoc()) {
 	<div id=\"".$product->pid."\"></div>
 	<label class=\"price\">".$product->price." LE</label></div>";
 }
-print_r($array);
 
 }else{
 	echo "<div id=\"noitems\"> <label> there is no items </label></div>";
 }
-echo "<script type=\"text/javascript\">
-function searchFun() {
-	var search = document.getElementById('search_input');
-	for (var i = 0; i < ".sizeof($array)."; i++) {
-		if (".$array[0]->pname.".includes(search.value)) {
-			console.log('include');
+$result->free();
+$conn->close();
+ function backdata()
+{
+	for ($i=0; $i < sizeof($array); $i++) { 
+		
+			echo "<div id=\"".$array[$i]->pname."-".$array[$i]->pid."\" class=\"product\"> <div> <img class=\"pimage\" src=\"imgs/tea.jpg\"></div>
+	<div id=\"".$array[$i]->pname."\">".$array[$i]->pname."</div>
+	<div id=\"".$array[$i]->pid."\"></div>
+	<label class=\"price\">".$array[$i]->price." LE</label></div>";
 		}
 	}
+if (isset($_POST['id'])) {
+	$conn = new mysqli("localhost","essam","iti123","php_project");
+  if ($conn->connect_errno) {
+trigger_error($conn->connect_error);
+}
+$i=2;
+$i++;
+date_default_timezone_set('Africa/Cairo');
+$query = "insert into orders values ('".$i."','".date("Y-m-d H:i:s")."','orderd','1')";
+$conn->query($query);
+$lastid= $conn->insert_id;
+echo $lastid;
+if (isset($_POST['id'])&&isset($_POST['teaAmount'])&&isset($_POST['teaPrice'])) {
+	echo $lastid." ".$_POST['teaPrice']." ".$_POST['id'];
+$query2 = "insert into order_details values ('".$i."','".$_POST['id']."','".$_POST['teaAmount']."','".$_POST['teaPrice']."')";
+$conn->query($query2);
+}
+echo $conn->error;
 }
 
-</script>";
+
 
 		 ?>
 	</div>
@@ -145,6 +175,9 @@ function searchFun() {
 	 <script type="text/javascript">
 var products = document.getElementsByClassName('product');
 var orderPoard = document.getElementById('order_div');
+var temp = products;
+	var productsboard = document.getElementById('productOrder');
+
 if (products) {
 for (i = 0; i < products.length; i++) {
     products[i].addEventListener('click',function (e) {
@@ -152,14 +185,40 @@ for (i = 0; i < products.length; i++) {
     	var index= this.id.indexOf('-');
     	var last = this.id.length;
     	var item= this.id.slice(0,index);
-    	var id = this.id.slice(index,last);
+    	var id = this.id.slice(index+1,last);
+    	var d=this.children;
+    	var price = d[3].innerHTML.slice(0,d[3].innerHTML.indexOf(" "));
     	console.log(index);
     	
     	console.log(item);
-	orderPoard.innerHTML+="<tr><td>"+item+"</td><td><input hidden=\"hidden\" value=\""+id+"\"></input><input type=\"number\" name=\"teaAmount\" min=\"0\" value=\"1\"></td><td><output name=\"teaPrice\"></output></td</tr>";
+	orderPoard.innerHTML+="<tr><td>"+item+"</td><td><input hidden=\"hidden\" name=\"id\" value=\""+id+"\"></input><input type=\"number\" name=\"teaAmount\" min=\"0\" value=\"1\"></td><td><input name=\"teaPrice\" hidden=\"hidden\" value=\""+price+"\"></input><output ></output ></td</tr>";
 });
 }
 }	 	
+function searchFun() {
+	var search = document.getElementById('search_input');
+	var products = document.getElementsByClassName('product');
+	
+	var searchBoard = document.getElementById('searchDiv');
+	searchBoard.innerHTML="";
+	for (var i = 0; i < temp.length; i++) {
+		var divs = temp[i].children;
+		if (divs[1].id.toString().includes(search.value)) {
+			if (search.value) {
+			console.log("include");
+			productsboard.innerHTML = "<div id=\""+temp[i].id+"\" class=\"product\"> <div> <img class=\"pimage\" src=\"imgs/tea.jpg\"></div>\
+	<div id=\""+divs[1].id+"\">"+divs[1].id+"</div>\
+	<div id=\""+divs[2].id+"\"></div>\
+	<label class=\"price\">"+divs[3].innerHTML+" </label></div>";
+}
+		}else{
+			searchBoard.innerHTML="<div>there is no item match</div>";
+		}
+	}
+	
+	}
+
+
 
 	 </script>
 </body>

@@ -1,24 +1,112 @@
+#header .navBar{
+	background-color: #54beca;
+	font-size: 30px;
+}
+
+#header .navBarAdmin{
+	background-color: #54beca;
+	font-size: 30px;
+}
+
+#header .navBar .userName{
+	float: right;
+	position: absolute;
+	right: 10px;
+	font-size: 30px;
+}
+
+#userName{
+	float: right;
+	top: 9px;
+	position: absolute;
+	right: 10px;
+	font-size: 25px;
+}
+
 .inputform {
-position: absolute;
-left: 200px;
+	position: absolute;
+	left: 200px;
 }
 
 .form {
-font-size: 20px;
-position: fixed;
-top: 90px;
-
+	font-size: 20px;
+	position: fixed;
+	top: 90px;
 }
  
-  .nav li {
+.nav li {
     display: inline-block;
     margin-right: -4px;
-  }
+}
  
- .profilepic {
- position: fixed;
- top: 10px;
- right: 90px;
- width: 50px;
- height: 50px;
- }
+.profilepic {
+	position: fixed;
+	top: 10px;
+	right: 90px;
+	width: 50px;
+	height: 50px;
+}
+
+
+#line{
+	border: 1px;
+	border-color: black;
+}
+
+.product{
+	display: inline-block;
+	margin: 10px;
+}
+
+.product:hover {
+	transform: scale(.75,.75);
+}
+
+.delbtn{
+	background-color: #FFF;
+	margin-left: 2px;
+}
+
+#menuBar{
+	float: left;
+}
+
+#searchBar{
+	clear: left;
+}
+
+#userTag{
+	/*position: absolute;*/
+	float: right;
+}
+
+#userImg{
+	width: 50px;
+	height: 50px;
+	top: 5px;
+	right: 140px;
+	position: absolute;
+	width: 50px;
+	height: 50px;
+}
+
+#orderForm{
+	float: left;
+}
+
+#productOrder{
+	align-content: center;
+}
+
+img{
+	width: 50px;
+	height: 50px;
+}
+
+table{
+	border-style: solid;
+    border-width: 5px;
+	border="5px";
+	width="1000px";
+	float: "center";
+}

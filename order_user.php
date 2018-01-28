@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Admin Page</title>
-	<link rel="stylesheet" type="text/css" href="css/georgestyle.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<style type="text/css">
 		#line{
 			border: 1px;
@@ -25,35 +25,37 @@
 
 <!-- menu bar -->
 
-	<div id="menuBar">
-		<a href="page2.html">Home</a> |
-		<a href="page2.html">My Orders</a>
-	</div>
+	<header id="header">
+		<div class="navBar">
+			<a href="order_user.php">Home</a> | 
+			<a href="myordershtml.php">My Orders</a>
+		</div>
+	</header>
 
 <!-- user image and name -->
 
 	<div id="userTag">
 		<img id="userImg" src="imgs/admin.jpg">
-		<u>Islam Askar</u>
+		<u id="userName">Islam Askar</u>
 	</div>
 
 <!-- search bar -->
-
+<br>
 	<div id="searchBar">
 		<input id="search_input" type="text" name="search" onkeyup="searchFun()" placeholder="search">
 	</div>
-
+<br>
 <!-- order form -->
 
 	<div id="orderForm">
 	<form oninput="pprice.value=teaAmount.value*teaPrice.value+' EGP'" action="order_user.php" method="post">
 		
 
-			<table id="order_div" >
+			<table class="container" id="order_div" >
 				
 			</table>
 		
-		    <table>
+		    <table class="container">
 			<tr>
 				<td>Notes</td>
 				<td><textarea name="notes" cols="21" rows="10"></textarea></td>
@@ -109,7 +111,7 @@
 		</table> -->
 		<?php 
 		require('product.php');
-		$conn = new mysqli("localhost","essam","iti123","php_project");
+		$conn = new mysqli("localhost","root","123456","php_project");
   if ($conn->connect_errno) {
 trigger_error($conn->connect_error);
 }
@@ -142,7 +144,7 @@ $conn->close();
 		}
 	}
 if (isset($_POST['id'])) {
-	$conn = new mysqli("localhost","essam","iti123","php_project");
+		$conn = new mysqli("localhost","root","godislove!!","php_project");
   if ($conn->connect_errno) {
 trigger_error($conn->connect_error);
 }
@@ -190,7 +192,7 @@ for (i = 0; i < products.length; i++) {
     	var dItem = document.getElementById("div"+id);
     	console.log(item);
     	if (!dItem) {
-	orderPoard.innerHTML += "<div id='div"+id+"'><label>"+item+"</label><input hidden=\"hidden\" name=\"id\" value=\""+id+"\"></input><input type=\"number\" name=\"teaAmount\" min=\"1\" value=\"1\"><input name=\"teaPrice\" hidden=\"hidden\" value=\""+price+"\"></input><input type=\"button\" onclick=\"delitem(this)\" name=\"del\" class=\"delbtn\" id='del"+id+"' value=\"X\"></input><output name=\"pprice\" ></output ></div>";
+	orderPoard.innerHTML += "<div id='div"+id+"'><tr><td><label>"+item+"</label></td><input hidden=\"hidden\" name=\"id\" value=\""+id+"\"></input><td align=\"center\"><input align=\"center\" type=\"number\" name=\"teaAmount\" min=\"1\" value=\"1\"></td><td><input name=\"teaPrice\" hidden=\"hidden\" value=\""+price+"\"></input></td><td><input type=\"button\" onclick=\"delitem(this)\" name=\"del\" class=\"delbtn\" id='del"+id+"' value=\"X\"></input></td><output name=\"pprice\" ></output ></tr></div>";
 	
 }else{
 	var childs = dItem.children;

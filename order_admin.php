@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Admin Page</title>
-	<link rel="stylesheet" type="text/css" href="css/georgestyle.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<style type="text/css">
 		#line{
 			border: 1px;
@@ -24,33 +24,20 @@
 <body>
 
 <!-- menu bar -->
-
-	<div id="menuBar">
-		<a href="page2.html">Home</a> |
-		<a href="page2.html">Products</a> |
-		<a href="page2.html">Users</a> |
-		<a href="page2.html">Manual Order</a> |
-		<a href="page2.html">Checks</a>
-	</div>
-
+	<header id="header">	
+		<div class="navBarAdmin">
+			<a href="orders.php">Home</a> |
+			<a href="products.php">Products</a> |
+			<a href="users.php">Users</a> |
+			<a href="order_admin.php">Manual Order</a> |
+			<a href="checks.php">Checks</a>
+		</div>
+	</header>
 <!-- user image and name -->
 
 	<div id="userTag">
 		<img id="userImg" src="imgs/admin.jpg">
-		<?php 
-		if (isset($_SESSION['user_name'])) {
-		echo "<u>".$_SESSION['user_name']."</u>";
-	}
-		 ?>
-		<a id="log_out" href="login.php?out='out'">logout</a>
-		<!-- <<?php 
-		/*echo "<script type=\"text/javascript\">
-		var logo=document.getElementById('log_out');
-		logo.addEventListener('click',function(e){
-			".$_SESSION = array();session_destroy();header("Location: login.php?out='out'");"
-		})
-		</script>"*/
-		 ?> -->
+		<u>Islam Askar</u>
 	</div>
 
 <!-- search bar -->
@@ -103,7 +90,7 @@
 				error_reporting(E_ALL);
 
 				#connect to the database
-				$conn = new mysqli("localhost", "essam", "iti123", "php_project");
+				$conn = new mysqli("localhost", "root", "123456", "php_project");
 				#check for errors
 				if ($conn->connect_errno){
 					trigger_error($db->connect_error);

@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>All Products</title>
+	<title>All Users</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 	<form action="update_user.php" method="post">
-		<div>
-			<a href="">Home</a> | 
-			<a href="">Products</a> |
-			<a href="">Users</a> |
-			<a href="">Manual Order</a> |
-			<a href="">Checks</a>
-			<img src="" align="right">
-			<a href="" align= "right" name="username">Admin</a>
-		</div>
+	
+	<header id="header"> 
+	    <div class="navBarAdmin">
+	      <a href="orders.php">Home</a> |
+	      <a href="products.php">Products</a> |
+	      <a href="users.php">Users</a> |
+	      <a href="order_admin.php">Manual Order</a> |
+	      <a href="checks.php">Checks</a>
+	    </div>
+ 	 </header>
 
-		<div>
-			<h2>All Products</h2>
-			<a href="">Add Product</a>
+		<div align="center">
+			<h1>All users</h1>
+			<a href="http://localhost/PHP-project-Cafe/adduser.html">Add User</a>
 		</div>
 
 		<br><br><br>
@@ -34,7 +36,7 @@
 
 				<?php		
 				
-					$conn = mysqli_connect("localhost","root","godislove!!","php_project");
+					$conn = mysqli_connect("localhost","root","123456","php_project");
 					if (mysqli_connect_errno()) {
 						trigger_error(mysqli_connect_error());
 						echo "error";

@@ -37,7 +37,20 @@
 
 	<div id="userTag">
 		<img id="userImg" src="imgs/admin.jpg">
-		<u>Islam Askar</u>
+		<?php 
+		if (isset($_SESSION['user_name'])) {
+		echo "<u>".$_SESSION['user_name']."</u>";
+	}
+		 ?>
+		<a id="log_out" href="login.php?out='out'">logout</a>
+		<!-- <<?php 
+		/*echo "<script type=\"text/javascript\">
+		var logo=document.getElementById('log_out');
+		logo.addEventListener('click',function(e){
+			".$_SESSION = array();session_destroy();header("Location: login.php?out='out'");"
+		})
+		</script>"*/
+		 ?> -->
 	</div>
 
 <!-- search bar -->

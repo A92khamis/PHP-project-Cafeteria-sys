@@ -8,6 +8,16 @@
 			border: 1px;
 			border-color: black;
 		}
+		.product{
+			display: inline-block;
+			margin: 10px;
+		}
+		.product:hover {
+			transform: scale(.75,.75);
+		}
+		.del{
+			background-color: lightgray;
+		}
 	</style>
 </head>
 <body>
@@ -38,7 +48,7 @@
 <!-- order form -->
 
 	<div id="orderForm">
-	<form oninput="teaPrice.value=teaAmount.value*5+' EGP', coffePrice.value=coffeAmount.value*7+' EGP', juicePrice.value=juiceAmount.value*12+' EGP', pepsiPrice.value=pepsiAmount.value*8+' EGP'" action="order_admin.php" method="post">
+	<form oninput="pprice.value=teaAmount.value*teaPrice.value+' EGP'" action="order_admin.php" method="post">
 		
 
 			<table id="order_div" >
@@ -73,10 +83,40 @@
 			</tr>
 			<tr>
 				<td>
-					<select>
-					<option>Islam Askar</option>
-					<option>S.Bahader</option>
-					<option>H.Sabagh</option>
+					<select id="user_select">
+					<?php
+				ini_set('display_errors', 'on');
+				error_reporting(E_ALL);
+
+				#connect to the database
+				$conn = new mysqli("localhost", "essam", "iti123", "php_project");
+				#check for errors
+				if ($conn->connect_errno){
+					trigger_error($db->connect_error);
+					echo "ERROR";
+				}
+
+				#select the user names from the users table
+				$user_names = $conn -> query("SELECT uname,uid FROM `users`");
+				$no_users = $user_names -> num_rows;
+				echo $no_users;
+				while ($user_names_array = $user_names -> fetch_assoc()){
+					
+						echo "<option value=\"".$user_names_array["uid"]."\">".$user_names_array["uname"]."</option>";
+				
+				}
+				echo "<script type=\"text/javascript\">
+				var users=document.getElementById('user_select');
+				var orderDiv = document.getElementById('order_div');
+				orderDiv.innerHTML+='<input id=\"user_id\" name=\"uid\" hidden=\"hidden\" value=\"'+users.value+'\"></input>';
+				var userid = document.getElementById('user_id');
+				users.addEventListener(\"change\", function() {
+					var userid = document.getElementById('user_id');
+						userid.value=users.value;
+				});
+				</script>";
+
+				?>
 					</select>
 				</td>
 			</tr>
@@ -152,20 +192,22 @@ if (isset($_POST['id'])) {
   if ($conn->connect_errno) {
 trigger_error($conn->connect_error);
 }
-$i=2;
+$i=4;
 $i++;
 date_default_timezone_set('Africa/Cairo');
 $query = "insert into orders values ('".$i."','".date("Y-m-d H:i:s")."','orderd','1')";
-$conn->query($query);
+
+if ($conn->query($query)) {	
 $lastid= $conn->insert_id;
-echo $lastid;
 if (isset($_POST['id'])&&isset($_POST['teaAmount'])&&isset($_POST['teaPrice'])) {
 	echo $lastid." ".$_POST['teaPrice']." ".$_POST['id'];
-$query2 = "insert into order_details values ('".$i."','".$_POST['id']."','".$_POST['teaAmount']."','".$_POST['teaPrice']."')";
+$query2 = "insert into order_details values ('".$i."','".$_POST['id']."','".$_POST['teaAmount']."','".$_POST['teaPrice']*$_POST['teaAmount']."')";
 $conn->query($query2);
 }
-echo $conn->error;
 }
+$conn->close();
+}
+
 
 
 
@@ -189,9 +231,10 @@ for (i = 0; i < products.length; i++) {
     	var d=this.children;
     	var price = d[3].innerHTML.slice(0,d[3].innerHTML.indexOf(" "));
     	console.log(index);
-    	
+    	var tr1 = document.getElementById(id);
     	console.log(item);
-	orderPoard.innerHTML+="<tr><td>"+item+"</td><td><input hidden=\"hidden\" name=\"id\" value=\""+id+"\"></input><input type=\"number\" name=\"teaAmount\" min=\"0\" value=\"1\"></td><td><input name=\"teaPrice\" hidden=\"hidden\" value=\""+price+"\"></input><output ></output ></td</tr>";
+
+	orderPoard.innerHTML+="<tr id='"+id+"'><td>"+item+"</td><td><input hidden=\"hidden\" name=\"id\" value=\""+id+"\"></input><input type=\"number\" name=\"teaAmount\" min=\"0\" value=\"1\"></td><td><input name=\"teaPrice\" hidden=\"hidden\" value=\""+price+"\"></input><output name=\"pprice\" ></output ><label class=\"del\" id='del"+id+"'>X</label></td></tr>";
 });
 }
 }	 	
@@ -218,6 +261,14 @@ function searchFun() {
 	
 	}
 
+	var dels=document.getElementsByClassName('del');
+	if (dels) {
+	for (var i = 0; i < dels.length; i++) {
+		dels[i].addEventListener("click",function (e) {
+			
+		})
+	}
+}
 
 
 	 </script>

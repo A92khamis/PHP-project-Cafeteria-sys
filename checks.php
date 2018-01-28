@@ -43,8 +43,8 @@
 			<select name="userName">
 				<!-- select user names from the data base to make the options -->
 				<?php
-				ini_set('display_errors', 'on');
-				error_reporting(E_ALL);
+			//	ini_set('display_errors', 'on');
+			//	error_reporting(E_ALL);
 
 				#connect to the database
 				$conn = new mysqli("localhost", "root", "", "php_project");

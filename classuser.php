@@ -45,7 +45,7 @@ class user {
 }
 //class user ended
 $id='NULL';
-$object = new user ($_POST['name'],$_POST['email'],$_POST['password'],$_POST['room_no'],$_POST['ext'],$id);
+$object = new user ($_POST['name'],$_POST['email'],md5($_POST['password']),$_POST['room_no'],$_POST['ext'],$id);
 
 	 $object->insertIntoDB();
 header('Location: users.php');

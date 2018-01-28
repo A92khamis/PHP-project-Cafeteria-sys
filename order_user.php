@@ -27,10 +27,7 @@
 
 	<div id="menuBar">
 		<a href="page2.html">Home</a> |
-		<a href="page2.html">Products</a> |
-		<a href="page2.html">Users</a> |
-		<a href="page2.html">Manual Order</a> |
-		<a href="page2.html">Checks</a>
+		<a href="page2.html">My Orders</a>
 	</div>
 
 <!-- user image and name -->
@@ -49,7 +46,7 @@
 <!-- order form -->
 
 	<div id="orderForm">
-	<form oninput="pprice.value=teaAmount.value*teaPrice.value+' EGP'" action="order_admin.php" method="post">
+	<form oninput="pprice.value=teaAmount.value*teaPrice.value+' EGP'" action="order_user.php" method="post">
 		
 
 			<table id="order_div" >
@@ -70,58 +67,14 @@
 				</select></td>
 			</tr>
 			<tr>
+				<td><h1>Total:</h1></td>
+				<td><h1 id='totalPriceDisplay'>0</h1></td>
+			</tr>
+			<tr>
 				<td><input type="submit" name="submit" value="Confirm"></td>
 			</tr>
 		</table>
 	</form>
-	</div>
-	<div>
-		<table>
-			<tr>
-				<td>
-					Add to user:
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<select id="user_select">
-					<?php
-				ini_set('display_errors', 'on');
-				error_reporting(E_ALL);
-
-				#connect to the database
-				$conn = new mysqli("localhost", "essam", "iti123", "php_project");
-				#check for errors
-				if ($conn->connect_errno){
-					trigger_error($db->connect_error);
-					echo "ERROR";
-				}
-
-				#select the user names from the users table
-				$user_names = $conn -> query("SELECT uname,uid FROM `users`");
-				$no_users = $user_names -> num_rows;
-				echo $no_users;
-				while ($user_names_array = $user_names -> fetch_assoc()){
-					
-						echo "<option value=\"".$user_names_array["uid"]."\">".$user_names_array["uname"]."</option>";
-				
-				}
-				echo "<script type=\"text/javascript\">
-				var users=document.getElementById('user_select');
-				var orderDiv = document.getElementById('order_div');
-				orderDiv.innerHTML+='<input id=\"user_id\" name=\"uid2\" hidden=\"hidden\" value=\"'+users.value+'\"></input>';
-				var userid = document.getElementById('user_id');
-				users.addEventListener(\"change\", function() {
-					var userid = document.getElementById('user_id');
-						userid.value=users.value;
-				});
-				</script>";
-
-				?>
-					</select>
-				</td>
-			</tr>
-		</table>
 	</div>
 
 <!-- products -->
@@ -193,15 +146,10 @@ if (isset($_POST['id'])) {
   if ($conn->connect_errno) {
 trigger_error($conn->connect_error);
 }
-$i=6;
+$i=7;
 $i++;
 date_default_timezone_set('Africa/Cairo');
-if (empty($_POST['uid2'])) {
 	$query = "insert into orders values ('".$i."','".date("Y-m-d H:i:s")."','orderd','1')";
-
-}else {
-	$query = "insert into orders values ('".$i."','".date("Y-m-d H:i:s")."','orderd','".$_POST['uid2']."')";
-}
 
 if ($conn->query($query)) {	
 $lastid= $conn->insert_id;

@@ -4,7 +4,7 @@
 	<title>All Products</title>
 </head>
 <body>
-	<form action="products.php" method="post">
+	<form action="update_user.php" method="post">
 		<div>
 			<a href="">Home</a> | 
 			<a href="">Products</a> |
@@ -40,18 +40,34 @@
 						echo "error";
 					}
 
-					$users_sql = mysqli_query($conn,"select uname, room_no, ext from users;");
+					$users_sql = mysqli_query($conn,"select uname, email, password,room_no, ext, uid from users;");
 					while ($users_arr_assoc = mysqli_fetch_assoc($users_sql)) {
 						echo "<tr align=\"center\">";
+						$user_data_arr= array();
 							foreach ($users_arr_assoc as $key => $value) {
-								echo "<td>";
-									echo $users_arr_assoc[$key];
-								echo "</td>";
+								if ($key != "email" && $key != "password" && $key != "uid") {	
+									echo "<td>";
+										echo $users_arr_assoc[$key];
+										$user_data_arr[] = $users_arr_assoc[$key];
+									echo "</td>";
+								}
+								else{
+									echo "<td hidden>";
+										echo $users_arr_assoc[$key];
+										$user_data_arr[] = $users_arr_assoc[$key];
+									echo "</td>";
+								}
 							}
 							echo "<td align=\"center\">"."</td>";
 							
+							$user_data_str = implode(",", $user_data_arr);
+							echo "<input type=\"text\" name=\"user_data_str\" value=\"$user_data_str \" hidden>";
+
 							echo "<td align=\"center\">";
-								echo "<a href=\"\">Edit</a>"."  ";
+								//Edit
+								echo "<a href=\"http://localhost/phpproject/update_user.php?update_data=$user_data_str\">Edit</a>"."  ";
+								
+								//Delete
 								echo "<a href=\"\">Delete</a>"."  ";
 							echo "</td>";
 						echo "</td>";

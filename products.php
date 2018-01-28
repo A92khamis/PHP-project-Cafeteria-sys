@@ -4,7 +4,7 @@
 	<title>All Products</title>
 </head>
 <body>
-	<form action="products.php" method="post">
+	<form action="update_product.php" method="post">
 		<div>
 			<a href="">Home</a> | 
 			<a href="">Products</a> |
@@ -39,21 +39,45 @@
 						trigger_error(mysqli_connect_error());
 						echo "error";
 					}
-
-					$products_sql = mysqli_query($conn,"Select pname, category, price FROM products");
+					$i = 0;
+					
+					$products_sql = mysqli_query($conn,"Select pname, category, price, pid, available FROM products");
 					while ($products_arr_assoc = mysqli_fetch_assoc($products_sql)) {
 						echo "<tr align=\"center\">";
+						$product_data_arr= array();
 							foreach ($products_arr_assoc as $key => $value) {
-								echo "<td>";
-									echo $products_arr_assoc[$key];
-								echo "</td>";
+								if ($key != "pid" && $key != "available") {		
+									echo "<td>";
+										echo $products_arr_assoc[$key];
+										$product_data_arr[] = $products_arr_assoc[$key];
+									echo "</td>";
+								}
+								else{
+									echo "<td hidden>";
+										echo $products_arr_assoc[$key];
+										$product_data_arr[] = $products_arr_assoc[$key];
+									echo "</td>";
+								}
 							}
 							echo "<td align=\"center\">"."</td>";
 							
+							$product_data_str = implode(",", $product_data_arr);
+							echo "<input type=\"text\" name=\"product_data_str\" value=\"$product_data_str \" hidden>";
+							
 							echo "<td align=\"center\">";
-								echo "<a href=\"\">Available</a>"."  ";
-								echo "<a href=\"\">Edit</a>"."  ";
-								echo "<a href=\"\">Delete</a>"."  ";
+								//Available
+								if ($product_data_arr[4] == "true") {
+									echo "<a name=\"available\" href=\"http://localhost/phpproject/update_product_sql.php?product_data=$product_data_str\">Unavailable</a>"."  ";
+								}
+								else{
+									echo "<a name=\"available\" href=\"http://localhost/phpproject/update_product_sql.php?product_data=$product_data_str\">Available</a>"."  ";
+								}
+								
+								//Edit
+								echo "<a href=\"http://localhost/phpproject/update_product.php?update_data=$product_data_str\">Edit</a>"."  ";
+								
+								//Delete
+								echo "<a name=\"delete\" href=\"http://localhost/phpproject/updateproductsql.php?product_data=$product_data_str\">Delete</a>"."  ";
 							echo "</td>";
 						echo "</td>";
 					}

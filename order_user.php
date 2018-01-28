@@ -46,7 +46,7 @@
 <!-- order form -->
 
 	<div id="orderForm">
-	<form oninput="pprice.value=teaAmount.value*teaPrice.value+' EGP'" id="form" action="order_user.php" method="post">
+	<form id="form" action="order_user.php" method="post">
 		
 
 			<table id="order_div" >
@@ -65,10 +65,6 @@
 					<option>2023</option>
 					<option>2008</option>
 				</select></td>
-			</tr>
-			<tr>
-				<td><h1>Total:</h1></td>
-				<td><h1 id='totalPriceDisplay' name="total">0</h1></td>
 			</tr>
 			<tr>
 				<td><input type="submit" name="submit" value="Confirm"></td>
@@ -232,21 +228,6 @@ function searchFun() {
 		console.log(e.parentNode);
 		e.parentNode.remove();
 	}
-
-	var form = document.getElementById('form');
-	var output = document.getElementsByName('pprice');
-	var amounts = document.getElementsByName('teaAmount');
-	var prices = document.getElementsByName('teaPrice');
-	var total =document.getElementById('totalPriceDisplay');
-	form.addEventListener("input", function (e) {
-		var tot=0;
-		for (var i = 0; i < output.length; i++) {
-			/*output[i].value=amounts[i].value*prices[i].value+' EGP';*/
-			tot+=parseInt(output[i].value);
-			
-		}
-		total.textContent =tot.toString();
-	});
 
 
 	 </script>

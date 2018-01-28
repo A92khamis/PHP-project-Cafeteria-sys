@@ -15,8 +15,9 @@
 		.product:hover {
 			transform: scale(.75,.75);
 		}
-		.del{
+		.delbtn{
 			background-color: lightgray;
+			margin-left: 2px;
 		}
 	</style>
 </head>
@@ -108,7 +109,7 @@
 				echo "<script type=\"text/javascript\">
 				var users=document.getElementById('user_select');
 				var orderDiv = document.getElementById('order_div');
-				orderDiv.innerHTML+='<input id=\"user_id\" name=\"uid\" hidden=\"hidden\" value=\"'+users.value+'\"></input>';
+				orderDiv.innerHTML+='<input id=\"user_id\" name=\"uid2\" hidden=\"hidden\" value=\"'+users.value+'\"></input>';
 				var userid = document.getElementById('user_id');
 				users.addEventListener(\"change\", function() {
 					var userid = document.getElementById('user_id');
@@ -192,20 +193,27 @@ if (isset($_POST['id'])) {
   if ($conn->connect_errno) {
 trigger_error($conn->connect_error);
 }
-$i=4;
+$i=6;
 $i++;
 date_default_timezone_set('Africa/Cairo');
-$query = "insert into orders values ('".$i."','".date("Y-m-d H:i:s")."','orderd','1')";
+if (empty($_POST['uid2'])) {
+	$query = "insert into orders values ('".$i."','".date("Y-m-d H:i:s")."','orderd','1')";
+
+}else {
+	$query = "insert into orders values ('".$i."','".date("Y-m-d H:i:s")."','orderd','".$_POST['uid2']."')";
+}
 
 if ($conn->query($query)) {	
 $lastid= $conn->insert_id;
 if (isset($_POST['id'])&&isset($_POST['teaAmount'])&&isset($_POST['teaPrice'])) {
-	echo $lastid." ".$_POST['teaPrice']." ".$_POST['id'];
+	
 $query2 = "insert into order_details values ('".$i."','".$_POST['id']."','".$_POST['teaAmount']."','".$_POST['teaPrice']*$_POST['teaAmount']."')";
 $conn->query($query2);
 }
 }
+echo $conn->error;
 $conn->close();
+
 }
 
 
@@ -231,12 +239,19 @@ for (i = 0; i < products.length; i++) {
     	var d=this.children;
     	var price = d[3].innerHTML.slice(0,d[3].innerHTML.indexOf(" "));
     	console.log(index);
-    	var tr1 = document.getElementById(id);
+    	var dItem = document.getElementById("div"+id);
     	console.log(item);
+    	if (!dItem) {
+	orderPoard.innerHTML += "<div id='div"+id+"'><label>"+item+"</label><input hidden=\"hidden\" name=\"id\" value=\""+id+"\"></input><input type=\"number\" name=\"teaAmount\" min=\"1\" value=\"1\"><input name=\"teaPrice\" hidden=\"hidden\" value=\""+price+"\"></input><input type=\"button\" onclick=\"delitem(this)\" name=\"del\" class=\"delbtn\" id='del"+id+"' value=\"X\"></input><output name=\"pprice\" ></output ></div>";
+	
+}else{
+	var childs = dItem.children;
+	childs[2].value = ++childs[2].value;
+}
 
-	orderPoard.innerHTML+="<tr id='"+id+"'><td>"+item+"</td><td><input hidden=\"hidden\" name=\"id\" value=\""+id+"\"></input><input type=\"number\" name=\"teaAmount\" min=\"0\" value=\"1\"></td><td><input name=\"teaPrice\" hidden=\"hidden\" value=\""+price+"\"></input><output name=\"pprice\" ></output ><label class=\"del\" id='del"+id+"'>X</label></td></tr>";
 });
 }
+
 }	 	
 function searchFun() {
 	var search = document.getElementById('search_input');
@@ -261,14 +276,11 @@ function searchFun() {
 	
 	}
 
-	var dels=document.getElementsByClassName('del');
-	if (dels) {
-	for (var i = 0; i < dels.length; i++) {
-		dels[i].addEventListener("click",function (e) {
-			
-		})
+	function delitem(e) {
+		console.log("allah");
+		console.log(e.parentNode);
+		e.parentNode.remove();
 	}
-}
 
 
 	 </script>

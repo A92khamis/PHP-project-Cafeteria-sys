@@ -27,10 +27,7 @@
 
 	<div id="menuBar">
 		<a href="page2.html">Home</a> |
-		<a href="page2.html">Products</a> |
-		<a href="page2.html">Users</a> |
-		<a href="page2.html">Manual Order</a> |
-		<a href="page2.html">Checks</a>
+		<a href="page2.html">My Orders</a>
 	</div>
 
 <!-- user image and name -->
@@ -49,7 +46,7 @@
 <!-- order form -->
 
 	<div id="orderForm">
-	<form oninput="pprice.value=teaAmount.value*teaPrice.value+' EGP'" action="order_admin.php" method="post">
+	<form oninput="pprice.value=teaAmount.value*teaPrice.value+' EGP'" action="order_user.php" method="post">
 		
 
 			<table id="order_div" >
@@ -149,15 +146,10 @@ if (isset($_POST['id'])) {
   if ($conn->connect_errno) {
 trigger_error($conn->connect_error);
 }
-$i=6;
+$i=7;
 $i++;
 date_default_timezone_set('Africa/Cairo');
-if (empty($_POST['uid2'])) {
 	$query = "insert into orders values ('".$i."','".date("Y-m-d H:i:s")."','orderd','1')";
-
-}else {
-	$query = "insert into orders values ('".$i."','".date("Y-m-d H:i:s")."','orderd','".$_POST['uid2']."')";
-}
 
 if ($conn->query($query)) {	
 $lastid= $conn->insert_id;

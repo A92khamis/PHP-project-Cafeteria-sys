@@ -20,8 +20,8 @@ class user {
 	}
 
 	public function insertIntoDB(){
-		$dbusername="akhamis";
-		$dbpassword="123456";
+		$dbusername="root";
+		$dbpassword="12345";
 		$dbserver="localhost";
 		$dbname="php_project"; 
 		// connecting database via mysqli oop

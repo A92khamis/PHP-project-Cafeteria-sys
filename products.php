@@ -18,7 +18,7 @@
 
 		<div>
 			<h1 align="center">All Products</h1>
-			<a href="http://localhost/PHP-project-Cafe/addproduct.html">Add Product</a>
+			<a href="12addproduct.html">Add Product</a>
 		</div>
 
 		<br><br><br>
@@ -35,7 +35,7 @@
 
 				<?php		
 				
-					$conn = mysqli_connect("localhost","root","123456","php_project");
+					$conn = mysqli_connect("localhost","root","12345","php_project");
 					if (mysqli_connect_errno()) {
 						trigger_error(mysqli_connect_error());
 						echo "error";

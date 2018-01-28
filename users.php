@@ -19,7 +19,7 @@
 
 		<div align="center">
 			<h1>All users</h1>
-			<a href="http://localhost/PHP-project-Cafe/adduser.html">Add User</a>
+			<a href="adduser.html">Add User</a>
 		</div>
 
 		<br><br><br>

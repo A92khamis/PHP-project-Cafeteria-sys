@@ -111,7 +111,7 @@
 		</table> -->
 		<?php 
 		require('product.php');
-		$conn = new mysqli("localhost","root","123456","php_project");
+		$conn = new mysqli("localhost","root","12345","php_project");
   if ($conn->connect_errno) {
 trigger_error($conn->connect_error);
 }
@@ -148,16 +148,15 @@ if (isset($_POST['id'])) {
   if ($conn->connect_errno) {
 trigger_error($conn->connect_error);
 }
-$i=7;
-$i++;
+$i='NULL';
 date_default_timezone_set('Africa/Cairo');
-	$query = "insert into orders values ('".$i."','".date("Y-m-d H:i:s")."','orderd','1')";
+	$query = "insert into orders values ('".$i."','".date("Y-m-d H:i:s")."','orderd','".$_SESSION['user_Id']."')";
 
 if ($conn->query($query)) {	
 $lastid= $conn->insert_id;
 if (isset($_POST['id'])&&isset($_POST['teaAmount'])&&isset($_POST['teaPrice'])) {
 	
-$query2 = "insert into order_details values ('".$i."','".$_POST['id']."','".$_POST['teaAmount']."','".$_POST['teaPrice']*$_POST['teaAmount']."')";
+$query2 = "insert into order_details values ('".$lastid."','".$_POST['id']."','".$_POST['teaAmount']."','".$_POST['teaPrice']*$_POST['teaAmount']."')";
 $conn->query($query2);
 }
 }

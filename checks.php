@@ -44,7 +44,7 @@
 				error_reporting(E_ALL);
 
 				#connect to the database
-				$conn = new mysqli("localhost", "root", "", "php_project");
+				$conn = new mysqli("localhost", "root", "12345", "php_project");
 
 				#check for errors
 

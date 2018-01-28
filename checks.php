@@ -47,7 +47,7 @@
 				error_reporting(E_ALL);
 
 				#connect to the database
-				$conn = new mysqli("localhost", "root", "12345", "php_project");
+				$conn = new mysqli("localhost", "root", "", "php_project");
 
 				#check for errors
 
@@ -77,8 +77,6 @@
 				<th> Total price </th>
 			</tr>
 			<?php
-				var_dump ($_POST);
-
 
 			$select_all_username_and_amount = "SELECT users.uname , sum(order_details.amount_price) AS total FROM users INNER JOIN orders ON users.uid = orders.uid INNER JOIN order_details ON  order_details.oid = orders.oid group by uname";
 			$result_all_users = $conn->query($select_all_username_and_amount);
@@ -106,17 +104,46 @@
 		$username = $_POST["userName"];
 		$fromDate=$_POST["fromDate"];
 		$toDate=$_POST["toDate"];
-		$select_username_and_amount = "SELECT users.uname , sum(order_details.amount_price) AS total, orders.odate FROM users INNER JOIN orders ON users.uid = orders.uid INNER JOIN order_details ON  order_details.oid = orders.oid WHERE users.uname ="."'".$username."'"." and orders.odate between'".$fromDate."'and'".$toDate."'group by orders.odate";
+		$select_username_and_amount = "SELECT users.uname , sum(order_details.amount_price) AS total, orders.odate , orders.oid FROM users INNER JOIN orders ON users.uid = orders.uid INNER JOIN order_details ON  order_details.oid = orders.oid WHERE users.uname ="."'".$username."'"." and orders.odate between'".$fromDate."'and'".$toDate."'group by orders.odate";
 		$result_user = $conn->query($select_username_and_amount);
 		while ($user_array = $result_user -> fetch_assoc()) {
-			echo "<tr align=\"center\">";
-			foreach ($user_array as $key => $value){
-				echo "<td id=".$user_array["$key"].">".$user_array["$key"]."</td>";	
-			}
+			echo "<tr  id =".$user_array["oid"]." align=\"center\">";
+				echo "<td>".$user_array["uname"]."</td>";
+				echo "<td>".$user_array["total"]."</td>";
+				echo "<td>".$user_array["odate"]."</td>";
+				echo "<td hidden>".$user_array["oid"]."</td>";
 			echo "</tr>";
-			# code...
-		}
+			echo "<tr align=\"center\">";
+			echo "<td colspan=\"3\">";
+			$order_id = $user_array["oid"];
+			// echo $order_id;
 
+			$select_order_details = "SELECT products.pname , products.price, order_details.product_amount from products inner join order_details on products.pid = order_details.pid inner join orders on  order_details.oid = orders.oid where orders.oid ="."'".$order_id."'";
+			$order_details_result = $conn -> query($select_order_details);
+			while ($order_details_array = $order_details_result -> fetch_assoc()){
+				// echo "<tr align=\"center\">";
+				echo "<div> <img src=\"imgs/tea.jpg\" id=\"tea\">   <div>";
+				foreach ($order_details_array as $key => $value) {
+					echo "| ".$key." :  ";
+        			echo $order_details_array["$key"];
+       				echo "   ";
+					// echo "<td>".$order_details_array["$key"]."</td>";
+					# code...
+				}
+				// echo "</tr>";
+			}
+			echo "</td>";
+			echo "</tr>";
+
+			# code...
+			// echo "<script>
+			// 	var myElement".$user_array["oid"]." = document.getElementById(".$user_array["oid"].");
+			// 	myElement.$user_array["oid"].addEventListener('click', function(){
+			// 		echo\"hello\";
+			// 	})
+
+			// </script>";
+		}
 		?>
 		</table>
 		</div>

@@ -9,3 +9,4 @@ select stament to show the dates
 select users.uname , sum(order_details.amount_price) as total, orders.odate from users inner join orders on users.uid = orders.uid inner join order_details on  order_details.oid = orders.oid where users.uname = 'george' group by orders.odate;
 
 
+select products.pname , products.price, order_details.product_amount from products inner join order_details on products.pid = order_details.pid inner join orders on  order_details.oid = orders.oid where orders.oid=4;

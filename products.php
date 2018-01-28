@@ -2,22 +2,23 @@
 <html>
 <head>
 	<title>All Products</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 	<form action="update_product.php" method="post">
-		<div>
-			<a href="">Home</a> | 
-			<a href="">Products</a> |
-			<a href="">Users</a> |
-			<a href="">Manual Order</a> |
-			<a href="">Checks</a>
-			<img src="" align="right">
-			<a href="" align= "right" name="username">Admin</a>
-		</div>
+	<header id="header"> 
+	    <div class="navBarAdmin">
+	      <a href="orders.php">Home</a> |
+	      <a href="products.php">Products</a> |
+	      <a href="users.php">Users</a> |
+	      <a href="order_admin.php">Manual Order</a> |
+	      <a href="checks.php">Checks</a>
+	    </div>
+  	</header>
 
 		<div>
-			<h2>All Products</h2>
-			<a href="">Add Product</a>
+			<h1 align="center">All Products</h1>
+			<a href="12addproduct.html">Add Product</a>
 		</div>
 
 		<br><br><br>
@@ -34,7 +35,7 @@
 
 				<?php		
 				
-					$conn = mysqli_connect("localhost","root","godislove!!","php_project");
+					$conn = mysqli_connect("localhost","root","12345","php_project");
 					if (mysqli_connect_errno()) {
 						trigger_error(mysqli_connect_error());
 						echo "error";
@@ -67,17 +68,17 @@
 							echo "<td align=\"center\">";
 								//Available
 								if ($product_data_arr[4] == "true") {
-									echo "<a name=\"available\" href=\"http://localhost/phpproject/update_product_sql.php?product_data=$product_data_str\">Unavailable</a>"."  ";
+									echo "<a name=\"available\" href=\"http://localhost/PHP-project-Cafe/update_product_sql.php?product_data=$product_data_str\">Unavailable</a>"."  ";
 								}
 								else{
-									echo "<a name=\"available\" href=\"http://localhost/phpproject/update_product_sql.php?product_data=$product_data_str\">Available</a>"."  ";
+									echo "<a name=\"available\" href=\"http://localhost/PHP-project-Cafe/update_product_sql.php?product_data=$product_data_str\">Available</a>"."  ";
 								}
 								
 								//Edit
-								echo "<a href=\"http://localhost/phpproject/update_product.php?update_data=$product_data_str\">Edit</a>"."  ";
+								echo "<a href=\"http://localhost/PHP-project-Cafe/update_product.php?update_data=$product_data_str\">Edit</a>"."  ";
 								
 								//Delete
-								echo "<a name=\"delete\" href=\"http://localhost/phpproject/updateproductsql.php?product_data=$product_data_str\">Delete</a>"."  ";
+								echo "<a name=\"delete\" href=\"http://localhost/PHP-project-Cafe/updateproductsql.php?product_data=$product_data_str\">Delete</a>"."  ";
 							echo "</td>";
 						echo "</td>";
 					}

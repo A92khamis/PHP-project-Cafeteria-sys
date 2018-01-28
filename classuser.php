@@ -20,8 +20,8 @@ class user {
 	}
 
 	public function insertIntoDB(){
-		$dbusername="akhamis";
-		$dbpassword="123456";
+		$dbusername="root";
+		$dbpassword="12345";
 		$dbserver="localhost";
 		$dbname="php_project"; 
 		// connecting database via mysqli oop
@@ -45,7 +45,7 @@ class user {
 }
 //class user ended
 $id='NULL';
-$object = new user ($_POST['name'],$_POST['email'],$_POST['password'],$_POST['room_no'],$_POST['ext'],$id);
+$object = new user ($_POST['name'],$_POST['email'],md5($_POST['password']),$_POST['room_no'],$_POST['ext'],$id);
 
 	 $object->insertIntoDB();
 header('Location: users.php');

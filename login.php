@@ -39,7 +39,7 @@ if (!empty($_GET)) {
 }
 function check_in_database()
 {
-  $conn = new mysqli("localhost","essam","iti123","php_project");
+  $conn = new mysqli("localhost","root","12345","php_project");
   if ($conn->connect_errno) {
 trigger_error($conn->connect_error);
 }

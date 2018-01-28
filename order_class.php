@@ -49,7 +49,7 @@ class Order{
 	public function insert_order(){
 		#connect to the database
 
-$conn = new mysqli("localhost", "root", "", "php_project");
+$conn = new mysqli("localhost", "root", "12345", "php_project");
 
 #check for errors
 

@@ -5,17 +5,16 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<div class="nav">
-   <label><a href="#">Home</a></label>
-   		<label>|</label>
-   <label><a href="#">Products</a></label>
-      	<label>|</label>
-   <label><a href="#">Users</a></label>
-      	<label>|</label>
-   <label><a href="#">Manuel Order</a></label>
-      	<label>|</label>
-   <label><a href="#">Checks</a></label>
-</div>
+	
+	<header id="header">	
+		<div class="navBarAdmin">
+			<a href="orders.php">Home</a> |
+			<a href="products.php">Products</a> |
+			<a href="users.php">Users</a> |
+			<a href="order_admin.php">Manual Order</a> |
+			<a href="checks.php">Checks</a>
+		</div>
+	</header>
     <div id="user">    
 </div>
 <h1>Update User</h1>

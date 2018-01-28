@@ -7,17 +7,19 @@ class product {
 	private $pName;
 	private $pPrice;
 	private $Category;
+	private $Available;
 
-	public function __construct($id,$name,$price,$category){
-		$this->pID 	  	= $id;
-		$this->pName  	= $name;
-		$this->pPrice 	= $price;
-		$this->Category = $category;
+	public function __construct($id,$name,$price,$category,$ava){
+		$this->pID 	  	 = $id;
+		$this->pName  	 = $name;
+		$this->pPrice 	 = $price;
+		$this->Category  = $category;
+		$this->Available = $ava;
 	}
 
 	public function insertIntoProductsDB(){
-		$dbusername="akhamis";
-		$dbpassword="123456";
+		$dbusername="root";
+		$dbpassword="12345";
 		$dbserver="localhost";
 		$dbname="php_project"; 
 		// connecting database via mysqli oop
@@ -28,9 +30,9 @@ class product {
 			echo "ERROR";
 		}
 		// prepared statement
-		 $sql = "insert into products values(?,?,?,?)";
+		 $sql = "insert into products values(?,?,?,?,?)";
  		if ($stmt = $conn->prepare($sql)) {
- 		$stmt->bind_param("isis",$this->pID,$this->pName,$this->pPrice,$this->Category);
+ 		$stmt->bind_param("isiss",$this->pID,$this->pName,$this->pPrice,$this->Category,$this->Available);
  		$result = $stmt->execute();
  		echo $result;
  		// Fetch data here
@@ -41,11 +43,12 @@ class product {
 }
 //class product ended
 $Pid='NULL';
-$productobj = new product ($Pid,$_POST['product'],$_POST['price'],$_POST['category']);
+$ava='true';
+$productobj = new product ($Pid,$_POST['product'],$_POST['price'],$_POST['category'],$ava);
 
 $productobj->insertIntoProductsDB();
 
-header('Location: products.php');
+// header('Location: products.php');
 
   ?>
  

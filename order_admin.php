@@ -222,7 +222,7 @@ $lastid= $conn->insert_id;
 /*$query2 = "insert into order_details values ('".$i."','".$_POST['id']."','".$_POST['teaAmount']."','".$_POST['teaPrice']*$_POST['teaAmount']."')";*/
 for ($j=1; $j <=$_POST['count']; $j++) { 
 	if (isset($_POST['id'.$j])&&isset($_POST['teaAmount'.$j])&&isset($_POST['teaPrice'.$j])) {
-		echo "enter";
+		
 $query2 = "insert into order_details values ('".$lastid."','".$_POST['id'.$j]."','".$_POST['teaAmount'.$j]."','".$_POST['teaPrice'.$j]*$_POST['teaAmount'.$j]."')";
 $conn->query($query2);
 }

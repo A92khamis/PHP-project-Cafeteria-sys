@@ -11,21 +11,19 @@
 	</style>
 </head>
 <body>
-<div class="nav">
-   <label><a href="#">Home</a></label>
-   		<label>|</label>
-   <label><a href="#">Products</a></label>
-      	<label>|</label>
-   <label><a href="#">Users</a></label>
-      	<label>|</label>
-   <label><a href="#">Manuel Order</a></label>
-      	<label>|</label>
-   <label><a href="#">Checks</a></label>
-</div>
-    <div id="user">    
-</div>
+  <header id="header"> 
+    <div class="navBarAdmin">
+      <a href="orders.php">Home</a> |
+      <a href="products.php">Products</a> |
+      <a href="users.php">Users</a> |
+      <a href="order_admin.php">Manual Order</a> |
+      <a href="checks.php">Checks</a>
+    </div>
+  </header>
+
+  <div id="user"></div>
 <h1>Orders</h1>
-      <table bordercolor="black" border="5px" width="1000px" align="center">
+  <table class="container" bordercolor="black" border="5px" width="1000px" align="center">
     <tr align="center">
       <th>order data</th>
       <th>Name</th>
@@ -35,8 +33,7 @@
  	    <th>TotalPrice</th>
     </tr>
     <?php   
-        
-          $conn = mysqli_connect("localhost","root","godislove!!","php_project");
+          $conn = mysqli_connect("localhost","root","12345","php_project");
           if (mysqli_connect_errno()) {
             trigger_error(mysqli_connect_error());
             echo "error";

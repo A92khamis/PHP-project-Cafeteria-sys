@@ -2,16 +2,23 @@
 <html>
 <head>
 	<title>My Orders</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-	<form action="myorders.php" method="post">
-		<div>
-			<a href="">Home</a> | 
-			<a href="">My Orders</a>
-			<img src="" align="right">
-			<a align="right" href="" name="username">user</a>
+	
+	<header id="header">
+		<div class="navBar">
+			<a href="order_user.php">Home</a> | 
+			<a href="myordershtml.php">My Orders</a>
 		</div>
+	</header>
 
+	<div id="userTag">
+		<img id="userImg" src="imgs/admin.jpg">
+		<u id="userName">Islam Askar</u>
+	</div>
+
+	<form action="myorders.php" method="post">
 		<div align="center">
 			<h1>My Orders</h1>
 			<input type="date" name="datefrom" id="datefrom" placeholder="Date from">
@@ -55,7 +62,7 @@
 						}
 					}
 					else{
-						echo "No Orders";
+						echo "<div align=\"center\">No Orders<div> <br>";
 					}
 				?>
 			
@@ -63,8 +70,8 @@
 					<td hight= "100px" colspan="4">&nbsp;</td>
 				</tr>
 			</table>
-
-			<button type="submit">Show</button>
+<br><br>
+			<p align="center"><button id="show" type="submit">Show</button></p> 
 		</div>
 	</form>
 	<script type="text/javascript" src="myorder.js"></script>

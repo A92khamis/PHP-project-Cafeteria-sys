@@ -62,7 +62,7 @@
 <!-- order form -->
 
 	<div id="orderForm">
-	<form oninput="pprice.value=teaAmount.value*teaPrice.value+' EGP'" action="order_admin.php" method="post">
+	<form  action="order_admin.php" method="post">
 		
 
 			<table id="order_div" >
@@ -201,16 +201,15 @@ $conn->close();
 	<label class=\"price\">".$array[$i]->price." LE</label></div>";
 		}
 	}
-if (isset($_POST['id'])) {
+if (!empty($_POST)) {
 	$conn = new mysqli("localhost","essam","iti123","php_project");
   if ($conn->connect_errno) {
 trigger_error($conn->connect_error);
 }
-$i=6;
-$i++;
+$i='NULL';
 date_default_timezone_set('Africa/Cairo');
 if (empty($_POST['uid2'])) {
-	$query = "insert into orders values ('".$i."','".date("Y-m-d H:i:s")."','orderd','1')";
+	$query = "insert into orders values ('".$i."','".date("Y-m-d H:i:s")."','orderd','".$_SESSION['user_id']."')";
 
 }else {
 	$query = "insert into orders values ('".$i."','".date("Y-m-d H:i:s")."','orderd','".$_POST['uid2']."')";
@@ -218,10 +217,16 @@ if (empty($_POST['uid2'])) {
 
 if ($conn->query($query)) {	
 $lastid= $conn->insert_id;
-if (isset($_POST['id'])&&isset($_POST['teaAmount'])&&isset($_POST['teaPrice'])) {
+
 	
-$query2 = "insert into order_details values ('".$i."','".$_POST['id']."','".$_POST['teaAmount']."','".$_POST['teaPrice']*$_POST['teaAmount']."')";
+/*$query2 = "insert into order_details values ('".$i."','".$_POST['id']."','".$_POST['teaAmount']."','".$_POST['teaPrice']*$_POST['teaAmount']."')";*/
+for ($j=1; $j <=$_POST['count']; $j++) { 
+	if (isset($_POST['id'.$j])&&isset($_POST['teaAmount'.$j])&&isset($_POST['teaPrice'.$j])) {
+		echo "enter";
+$query2 = "insert into order_details values ('".$lastid."','".$_POST['id'.$j]."','".$_POST['teaAmount'.$j]."','".$_POST['teaPrice'.$j]*$_POST['teaAmount'.$j]."')";
 $conn->query($query2);
+}
+
 }
 }
 echo $conn->error;
@@ -240,10 +245,12 @@ var products = document.getElementsByClassName('product');
 var orderPoard = document.getElementById('order_div');
 var temp = products;
 	var productsboard = document.getElementById('productOrder');
+	count=0;
 
 if (products) {
 for (i = 0; i < products.length; i++) {
     products[i].addEventListener('click',function (e) {
+    	count++;
     	console.log(this.id);
     	var index= this.id.indexOf('-');
     	var last = this.id.length;
@@ -255,7 +262,7 @@ for (i = 0; i < products.length; i++) {
     	var dItem = document.getElementById("div"+id);
     	console.log(item);
     	if (!dItem) {
-	orderPoard.innerHTML += "<div id='div"+id+"'><label>"+item+"</label><input hidden=\"hidden\" name=\"id\" value=\""+id+"\"></input><input type=\"number\" name=\"teaAmount\" min=\"1\" value=\"1\"><input name=\"teaPrice\" hidden=\"hidden\" value=\""+price+"\"></input><input type=\"button\" onclick=\"delitem(this)\" name=\"del\" class=\"delbtn\" id='del"+id+"' value=\"X\"></input><output name=\"pprice\" ></output ></div>";
+	orderPoard.innerHTML += "<div id='div"+id+"'><label>"+item+"</label><input hidden=\"hidden\" name=\"id"+count+"\" value=\""+id+"\"></input><input type=\"number\" name=\"teaAmount"+count+"\" min=\"1\" value=\"1\"><input name=\"teaPrice"+count+"\" hidden=\"hidden\" value=\""+price+"\"></input><input name=\"count\" hidden=\"hidden\" value=\""+count+"\"></input><input type=\"button\" onclick=\"delitem(this)\" name=\"del\" class=\"delbtn\" id='del"+id+"' value=\"X\"></input><output name=\"pprice"+count+"\" ></output ></div>";
 	
 }else{
 	var childs = dItem.children;

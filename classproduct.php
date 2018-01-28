@@ -1,5 +1,6 @@
 <?php
 	
+
 class product {
 
 	private $pID;
@@ -44,7 +45,7 @@ $productobj = new product ($Pid,$_POST['product'],$_POST['price'],$_POST['catego
 
 $productobj->insertIntoProductsDB();
 
-header('Location: addproduct.html');
+header('Location: products.php');
 
   ?>
  

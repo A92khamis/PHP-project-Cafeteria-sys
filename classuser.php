@@ -1,4 +1,5 @@
 <?php
+
 class user {
 
 	private $uname;
@@ -47,7 +48,7 @@ $id='NULL';
 $object = new user ($_POST['name'],$_POST['email'],$_POST['password'],$_POST['room_no'],$_POST['ext'],$id);
 
 	 $object->insertIntoDB();
-header('Location: adduser.html');
+header('Location: users.php');
 
   ?>
  

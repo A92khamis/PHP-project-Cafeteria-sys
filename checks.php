@@ -47,7 +47,7 @@
 			//	error_reporting(E_ALL);
 
 				#connect to the database
-				$conn = new mysqli("localhost", "root", "", "php_project");
+				$conn = new mysqli("localhost", "root", "12345", "php_project");
 
 				#check for errors
 
@@ -71,12 +71,19 @@
 
 		<!-- place holder to show the orders -->
 		<div id="displayOrders">
-			<table>
+      <table bordercolor="black" border="5px" width="1000px" align="center">
+			<tr align="center">
+				<th> Name </th>
+				<th> Total price </th>
+			</tr>
 			<?php
+				var_dump ($_POST);
+
+
 			$select_all_username_and_amount = "SELECT users.uname , sum(order_details.amount_price) AS total FROM users INNER JOIN orders ON users.uid = orders.uid INNER JOIN order_details ON  order_details.oid = orders.oid group by uname";
 			$result_all_users = $conn->query($select_all_username_and_amount);
 			while ($all_users_array = $result_all_users -> fetch_assoc()){
-				echo "<tr>";
+				echo "<tr align=\"center\">";
 					foreach ($all_users_array as $key => $value) {
 
 						echo "<td id=".$all_users_array["$key"].">".$all_users_array["$key"]."</td>";
@@ -87,20 +94,32 @@
 			?>
 			</table>
 		</div>
+		<div>
+	<table bordercolor="black" border="5px" width="1000px" align="center">
+		<tr align="center">
+
+				<th> Name </th>
+				<th> Order Price </th>
+				<th> Order Date</th>
+			</tr>
 		<?php
 		$username = $_POST["userName"];
-		$select_username_and_amount = "SELECT users.uname , sum(order_details.amount_price) AS total, orders.odate FROM users INNER JOIN orders ON users.uid = orders.uid INNER JOIN order_details ON  order_details.oid = orders.oid WHERE users.uname ="."'".$username."'"."group by orders.odate";
+		$fromDate=$_POST["fromDate"];
+		$toDate=$_POST["toDate"];
+		$select_username_and_amount = "SELECT users.uname , sum(order_details.amount_price) AS total, orders.odate FROM users INNER JOIN orders ON users.uid = orders.uid INNER JOIN order_details ON  order_details.oid = orders.oid WHERE users.uname ="."'".$username."'"." and orders.odate between'".$fromDate."'and'".$toDate."'group by orders.odate";
 		$result_user = $conn->query($select_username_and_amount);
 		while ($user_array = $result_user -> fetch_assoc()) {
-			echo "<tr>";
+			echo "<tr align=\"center\">";
 			foreach ($user_array as $key => $value){
-				echo "<td id=".$user_array["$key"].">".$user_array["$key"]."</td>";
+				echo "<td id=".$user_array["$key"].">".$user_array["$key"]."</td>";	
 			}
 			echo "</tr>";
 			# code...
 		}
-		?>
 
+		?>
+		</table>
+		</div>
 
 		<div>
 			<button id="showBtn">SHOW</button>
@@ -118,4 +137,4 @@
 </script>
 
 </body>
-</html>
+</html>1

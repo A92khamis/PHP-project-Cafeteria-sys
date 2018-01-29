@@ -14,8 +14,13 @@
 	</header>
 
 	<div id="userTag">
-		<img id="userImg" src="imgs/admin.jpg">
-		<u id="userName">Islam Askar</u>
+		<img id="userImg" src="imgs/uu.jpg">
+		<?php 
+		if (isset($_SESSION['user_name'])) {
+		echo "<u>".$_SESSION['user_name']."</u>";
+	}
+		 ?>
+		<a id="log_out" href="login.php?out='out'">logout</a>
 	</div>
 
 	<form action="myorders.php" method="post">

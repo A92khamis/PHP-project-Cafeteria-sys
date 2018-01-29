@@ -21,7 +21,12 @@
 
 	<div id="userTag">
 		<img id="userImg" src="imgs/admin.jpg">
-		<u id="userName">Islam Askar</u>
+		<?php 
+		if (isset($_SESSION['user_name'])) {
+		echo "<u>".$_SESSION['user_name']."</u>";
+	}
+		 ?>
+		<a id="log_out" href="login.php?out='out'">logout</a>
 	</div>
 
 	<div>

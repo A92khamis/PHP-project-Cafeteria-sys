@@ -14,8 +14,15 @@
 	      <a href="checks.php">Checks</a>
 	    </div>
  	</header>
-    <div id="user">    
-</div>
+    <div id="userTag">
+		<img id="userImg" src="imgs/admin.jpg">
+		<?php 
+		if (isset($_SESSION['user_name'])) {
+		echo "<u>".$_SESSION['user_name']."</u>";
+	}
+		 ?>
+		<a id="log_out" href="login.php?out='out'">logout</a>
+	</div>
 <h1>Add User</h1>
 <form class="form" " action="classuser.php" method="post"> 
 

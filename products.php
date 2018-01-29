@@ -15,6 +15,15 @@
 	      <a href="checks.php">Checks</a>
 	    </div>
   	</header>
+  	<div id="userTag">
+		<img id="userImg" src="imgs/admin.jpg">
+		<?php 
+		if (isset($_SESSION['user_name'])) {
+		echo "<u>".$_SESSION['user_name']."</u>";
+	}
+		 ?>
+		<a id="log_out" href="login.php?out='out'">logout</a>
+	</div>
 
 		<div>
 			<h1 align="center">All Products</h1>

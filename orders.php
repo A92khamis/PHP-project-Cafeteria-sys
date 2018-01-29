@@ -21,8 +21,15 @@
     </div>
   </header>
 
-    <div id="user">    
-</div>
+    <div id="userTag">
+    <img id="userImg" src="imgs/admin.jpg">
+    <?php 
+    if (isset($_SESSION['user_name'])) {
+    echo "<u>".$_SESSION['user_name']."</u>";
+  }
+     ?>
+    <a id="log_out" href="login.php?out='out'">logout</a>
+  </div>
 <h1>Orders</h1>
       <table bordercolor="black" border="5px" width="1000px" align="center">
     <tr align="center">
